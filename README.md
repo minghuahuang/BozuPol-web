@@ -12,7 +12,7 @@ vue3 + vite + typescript
 
 > createWebHistory: history模式称为HTML5模式，利于SEO，路由格式：`http://example.com/home`
 >
-> createWebHashHistory: hash模式，hash改变不会触发请求，路由格式：http://example.com/#home
+> createWebHashHistory: hash模式，hash改变不会触发请求，路由格式：`http://example.com/#home`
 >
 > createMemoryHistory: memory模式，基于内存的历史记录，主要处理ssr
 >
@@ -32,3 +32,36 @@ vue3 + vite + typescript
 >
 > `router.push({ name: 'Home', params: { id: 2 } })` 使用name + params传参，通过routes.params获取参数
 >  
+
+3. 利用unplugin-auto-import 和 unplugin-vue-components配置element-plus按需加载
+
+> `npm install -D unplugin-auto-import unplugin-vue-components` 安装插件
+>
+> vite.config.ts中配置plugin
+>
+```javascript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [ ElementPlusResolver() ]
+    }),
+    Components({
+      resolvers: [ ElementPlusResolver() ]
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'), // 配置alias
+    }
+  },
+})
+```
