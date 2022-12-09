@@ -21,7 +21,7 @@
 		message: "this is a message",
 	});
 	const getSessionId = () => {
-		fetchSessionId()
+		fetchSessionId({ id: 412005352 })
 			.then((res) => {
 				console.log(res);
 			})
