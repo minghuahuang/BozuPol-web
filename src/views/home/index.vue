@@ -12,6 +12,7 @@
 <script setup lang="ts">
 	import { useRouter, useRoute } from "vue-router";
 	import { getCurrentInstance } from "vue";
+	import { fetchSessionId } from "@/api/index.ts";
 	const router = useRouter();
 	const routes = useRoute();
 	console.log(routes.params);
@@ -19,6 +20,16 @@
 	proxy.$message({
 		message: "this is a message",
 	});
+	const getSessionId = () => {
+		fetchSessionId()
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	getSessionId();
 </script>
 
 <style lang="scss" scoped>

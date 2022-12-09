@@ -65,3 +65,5 @@ export default defineConfig({
   },
 })
 ```
+
+4. vite3配置scss只需要安装sass即可，无需vite.config.ts配置
