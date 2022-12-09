@@ -67,3 +67,22 @@ export default defineConfig({
 ```
 
 4. vite3配置scss只需要安装sass即可，无需vite.config.ts配置
+
+5. 配置vue-i18n中报错`Uncaught SyntaxError: Not available in legacy mode`，需要在i18n初始化中配置`legacy: false`
+
+```javascript
+import { createI18n } from 'vue-i18n'
+import zh from './zh'
+import en from './en'
+
+const i18n = createI18n({
+  legacy: false,
+  locale: 'zh',
+  messages: {
+    zh,
+    en
+  }
+})
+
+export default i18n
+```
