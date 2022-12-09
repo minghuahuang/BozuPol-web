@@ -1,5 +1,8 @@
 <template>
-	<div>首页</div>
+	<div class="home">
+		<div>首页</div>
+		<div class="blue">蓝色</div>
+	</div>
 	<button @click="() => router.push({ path: '/mine', query: { id: 1 } })">
 		跳转个人中心
 	</button>
@@ -18,4 +21,11 @@
 	});
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+	.home {
+		color: red;
+		.blue {
+			color: blue;
+		}
+	}
+</style>

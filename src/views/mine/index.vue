@@ -13,4 +13,4 @@
 	console.log(routes.query);
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
