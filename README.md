@@ -4,7 +4,7 @@ vue3 + nuxt 实现ssr项目
 
 ## 使用技术栈
 
-vue3 + vite + typescript
+vue3 + vite + typescript + indexedDB
 
 ## 学习记录
 
