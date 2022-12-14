@@ -1,8 +1,5 @@
 <template>
-	<button>
-		{{ t("message.home") }}
-	</button>
-	<el-table mb-1 :data="[]" />
+	<div>首页</div>
 </template>
 
 <script setup lang="ts">

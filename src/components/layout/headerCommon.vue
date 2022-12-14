@@ -25,7 +25,7 @@
 <script setup lang="ts">
 	import zhCn from "element-plus/lib/locale/lang/zh-cn";
 	import en from "element-plus/lib/locale/lang/en";
-	import { ref, defineEmits } from "vue";
+	import { ref } from "vue";
 	import { savaLanguage, fetchLanguage } from "../../api/layout";
 	import { useI18n } from "vue-i18n";
 

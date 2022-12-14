@@ -1,7 +1,9 @@
 <template>
 	<el-config-provider :locale="locale">
 		<HeaderCommon @changeLanguage="handleLanguageChage" />
-		<router-view></router-view>
+		<div class="container">
+			<router-view></router-view>
+		</div>
 		<FooterCommon />
 	</el-config-provider>
 </template>

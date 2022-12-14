@@ -1,14 +1,16 @@
 <template>
 	<div class="footer">
-		<ul>
-			<li v-for="option in menus">
-				<h4>{{ t(`footer['${option.title}']`) }}</h4>
-				<a target="_blank" :href="item.link" v-for="item in option.list">{{
-					t(`footer['${item.name}']`)
-				}}</a>
-			</li>
-		</ul>
-		<div class="copy">@2022 design by Ming in beijing. All rights reserved</div>
+		<div class="footer-wrapper">
+			<ul>
+				<li v-for="option in menus">
+					<h4>{{ t(`footer['${option.title}']`) }}</h4>
+					<a target="_blank" :href="item.link" v-for="item in option.list">{{
+						t(`footer['${item.name}']`)
+					}}</a>
+				</li>
+			</ul>
+			<div class="copy">@2022 design by Ming in beijing. All rights reserved</div>
+		</div>
 	</div>
 </template>
 
