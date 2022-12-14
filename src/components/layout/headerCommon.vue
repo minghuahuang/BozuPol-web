@@ -65,5 +65,5 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "@/assets/scss/layout/index.scss";
+	@import "@/assets/scss/layout/header.scss";
 </style>

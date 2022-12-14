@@ -1,12 +1,14 @@
 <template>
 	<el-config-provider :locale="locale">
-		<headerCommonVue @changeLanguage="handleLanguageChage" />
+		<HeaderCommon @changeLanguage="handleLanguageChage" />
 		<router-view></router-view>
+		<FooterCommon />
 	</el-config-provider>
 </template>
 
 <script setup lang="ts">
-	import headerCommonVue from "./components/layout/headerCommon.vue";
+	import FooterCommon from "./components/layout/footerCommon.vue";
+	import HeaderCommon from "./components/layout/headerCommon.vue";
 	import zhCn from "element-plus/lib/locale/lang/zh-cn";
 	import en from "element-plus/lib/locale/lang/en";
 	import { ref } from "vue";
@@ -20,4 +22,10 @@
 	};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+	#app {
+		font-family: Avenir, Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+</style>

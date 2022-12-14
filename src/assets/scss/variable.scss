@@ -1,0 +1,17 @@
+@mixin line-text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin main-wrapper {
+  width: 1080px;
+  margin: 0 auto;
+}
+
+@mixin flex-layout($dir: column, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
+}
