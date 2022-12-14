@@ -8,11 +8,11 @@
 			:ellipsis="false"
 			@select="handleSelect"
 		>
-			<el-menu-item index="orders">房屋订单中心</el-menu-item>
-			<el-menu-item index="records">历史足迹</el-menu-item>
+			<el-menu-item index="orders">{{ t("header.orders") }}</el-menu-item>
+			<el-menu-item index="records">{{ t("header.records") }}</el-menu-item>
 			<el-sub-menu index="language">
-				<template #title>国际化切换</template>
-				<el-menu-item index="zh">中文</el-menu-item>
+				<template #title>{{ t("header.language") }}</template>
+				<el-menu-item index="zh">简体中文</el-menu-item>
 				<el-menu-item index="en">English</el-menu-item>
 			</el-sub-menu>
 			<el-menu-item index="avatar">
@@ -27,6 +27,9 @@
 	import en from "element-plus/lib/locale/lang/en";
 	import { ref, defineEmits } from "vue";
 	import { savaLanguage, fetchLanguage } from "../../api/layout";
+	import { useI18n } from "vue-i18n";
+
+	const { t } = useI18n();
 
 	const activeIndex = ref("orders");
 

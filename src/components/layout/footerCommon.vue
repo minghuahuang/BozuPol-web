@@ -2,9 +2,9 @@
 	<div class="footer">
 		<ul>
 			<li v-for="option in menus">
-				<h4>{{ option.title }}</h4>
+				<h4>{{ t(`footer['${option.title}']`) }}</h4>
 				<a target="_blank" :href="item.link" v-for="item in option.list">{{
-					item.name
+					t(`footer['${item.name}']`)
 				}}</a>
 			</li>
 		</ul>
@@ -14,79 +14,83 @@
 
 <script setup lang="ts">
 	import { reactive } from "vue";
+	import { useI18n } from "vue-i18n";
+
+	const { t } = useI18n();
+
 	const menus = reactive([
 		{
-			title: "包租婆",
+			title: "bozupol",
 			list: [
 				{
-					name: "工作机会",
+					name: "careers",
 					link: "www.baidu.com",
 				},
 				{
-					name: "包租婆新闻",
+					name: "news",
 					link: "www.baidu.com",
 				},
 				{
-					name: "政策",
+					name: "topic",
 					link: "www.baidu.com",
 				},
 				{
-					name: "无障碍设施",
+					name: "accessibility",
 					link: "www.baidu.com",
 				},
 			],
 		},
 		{
-			title: "发现",
+			title: "discovery",
 			list: [
 				{
-					name: "信任与安全",
+					name: "trustAndSafe",
 					link: "www.baidu.com",
 				},
 				{
-					name: "旅行基金",
+					name: "funds",
 					link: "www.baidu.com",
 				},
 				{
-					name: "商务差旅",
+					name: "evection",
 					link: "www.baidu.com",
 				},
 				{
-					name: "包租婆杂志",
+					name: "magzine",
 					link: "www.baidu.com",
 				},
 			],
 		},
 		{
-			title: "出租",
+			title: "rent",
 			list: [
 				{
-					name: "为什么出租",
+					name: "whyRent",
 					link: "www.baidu.com",
 				},
 				{
-					name: "房东义务",
+					name: "responsibleHosting",
 					link: "www.baidu.com",
 				},
 				{
-					name: "开展体验",
+					name: "experiences",
 					link: "www.baidu.com",
 				},
 				{
-					name: "资源中心",
+					name: "resources",
 					link: "www.baidu.com",
 				},
 			],
 		},
 		{
-			title: "客服支持",
+			title: "service",
 			list: [
 				{
-					name: "帮助",
+					name: "help",
 					link: "www.baidu.com",
 				},
 				{
-					name: "邻里支持",
+					name: "neighbors",
 					link: "www.baidu.com",
 				},
 			],
