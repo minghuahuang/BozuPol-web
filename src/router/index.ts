@@ -1,5 +1,5 @@
 import home from '@/views/home/index.vue'
-import mine from '@/views/mine/index.vue'
+import login from '@/views/login/index.vue'
 import { createRouter, createWebHistory, createWebHashHistory, createMemoryHistory } from 'vue-router'
 
 /**
@@ -22,9 +22,9 @@ const routes = [
     }
   },
   {
-    path: '/mine',
-    name: 'Mine',
-    component: mine,
+    path: '/login',
+    name: 'Login',
+    component: login,
     meta: {
       title: '',
       keepAlive: false,

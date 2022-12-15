@@ -1,10 +1,13 @@
 <template>
 	<el-config-provider :locale="locale">
-		<HeaderCommon @changeLanguage="handleLanguageChage" />
+		<HeaderCommon
+			v-show="!/login/.test(route.fullPath)"
+			@changeLanguage="handleLanguageChage"
+		/>
 		<div class="container">
 			<router-view></router-view>
 		</div>
-		<FooterCommon />
+		<FooterCommon v-show="!/login/.test(route.fullPath)" />
 	</el-config-provider>
 </template>
 
@@ -15,6 +18,7 @@
 	import en from "element-plus/lib/locale/lang/en";
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
+	import { useRoute } from "vue-router";
 
 	const locale = ref(zhCn);
 	const { locale: localeLanguage } = useI18n();
@@ -22,6 +26,8 @@
 		locale.value = lanuage;
 		localeLanguage.value = lanuage.name;
 	};
+
+	const route = useRoute();
 </script>
 
 <style lang="scss" scoped>

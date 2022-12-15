@@ -18,6 +18,9 @@
 			<el-menu-item index="avatar">
 				<img class="avatar" src="../../assets/images/layout/avatar.png" alt="ming" />
 			</el-menu-item>
+			<el-menu-item index="login">
+				{{ t("login.loginTab") }}/{{ t("login.signTab") }}
+			</el-menu-item>
 		</el-menu>
 	</div>
 </template>
@@ -28,8 +31,11 @@
 	import { ref } from "vue";
 	import { savaLanguage, fetchLanguage } from "../../api/layout";
 	import { useI18n } from "vue-i18n";
+	import { useRouter } from "vue-router";
 
 	const { t } = useI18n();
+
+	const router = useRouter();
 
 	const activeIndex = ref("orders");
 
@@ -40,6 +46,10 @@
 		} else if (key === "en") {
 			emit("changeLanguage", en);
 			handleLanguageSave(en);
+		} else if (key === "login") {
+			router.push({
+				path: "/login",
+			});
 		}
 	};
 
@@ -55,10 +65,11 @@
 
 	const handleLanguageGet = () => {
 		fetchLanguage().then((res) => {
+			console.log(res);
 			if (res.code === 200) {
-				if (res.data.name.name === "zh") {
+				if (res.data && res.data.name.name === "zh") {
 					emit("changeLanguage", zhCn);
-				} else if (res.data.name.name === "en") {
+				} else if (res.data && res.data.name.name === "en") {
 					emit("changeLanguage", en);
 				}
 			}
