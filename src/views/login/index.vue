@@ -32,55 +32,34 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, reactive } from "vue";
+	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
+	import { useRouter } from "vue-router";
+	import useFormProperties from "@/composables/login/useFormProperties";
+	import userFormOperates from "@/composables/login/userFormOperates";
 
-	type InfoType = {
-		phone: string;
-		password: string;
-	};
+	const router = useRouter();
 
 	const { t } = useI18n();
 
-	const activeName = ref("login");
+	const { activeName, loginText, info, rules } = useFormProperties(t);
 
-	const loginText = ref(t("login.loginBtn"));
+	const { fetchSign, fetchLogin } = userFormOperates(router, info);
+
 	const handleTabClick = (val: any) => {
 		const { name } = val.props;
-		if (name === "login") {
-			loginText.value = t("login.loginBtn");
-		} else if (name === "sign") {
-			loginText.value = t("login.signBtn");
-		}
+		loginText.value = t(`login['${name}Btn']`);
 	};
 
 	const login = ref();
-	const info: InfoType = reactive({
-		phone: "",
-		password: "",
-	});
-	const rules = reactive({
-		phone: [
-			{
-				required: true,
-				min: 11,
-				max: 11,
-				message: t("login.placeMobile"),
-				trigger: "blur",
-			},
-		],
-		password: [
-			{
-				required: true,
-				message: t("login.placePass"),
-				trigger: "blur",
-			},
-		],
-	});
 	const handleLogin = () => {
 		login.value.validate((valid: boolean) => {
 			if (valid) {
-				console.log(info);
+				if (activeName.value === "sign") {
+					fetchSign(info);
+				} else if (activeName.value === "login") {
+					fetchLogin(info);
+				}
 			}
 		});
 	};

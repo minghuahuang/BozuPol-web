@@ -1,12 +1,7 @@
 import DB from '../../utils/indexedDB'
 import { ElLoading } from 'element-plus'
+import type { ResponseType } from '../type'
 const db = new DB('bozupol')
-
-type ResponseType = {
-  code: number,
-  message: string,
-  data: any
-}
 
 // 保存当前语言包接口
 export async function savaLanguage(lang:any) {

@@ -1,9 +1,6 @@
 <template>
-	<el-config-provider :locale="locale">
-		<HeaderCommon
-			v-show="!/login/.test(route.fullPath)"
-			@changeLanguage="handleLanguageChage"
-		/>
+	<el-config-provider :locale="state.locale">
+		<HeaderCommon v-show="!/login/.test(route.fullPath)" />
 		<div class="container">
 			<router-view></router-view>
 		</div>
@@ -14,18 +11,10 @@
 <script setup lang="ts">
 	import FooterCommon from "./components/layout/footerCommon.vue";
 	import HeaderCommon from "./components/layout/headerCommon.vue";
-	import zhCn from "element-plus/lib/locale/lang/zh-cn";
-	import en from "element-plus/lib/locale/lang/en";
-	import { ref } from "vue";
-	import { useI18n } from "vue-i18n";
 	import { useRoute } from "vue-router";
+	import { useStore } from "@/store";
 
-	const locale = ref(zhCn);
-	const { locale: localeLanguage } = useI18n();
-	const handleLanguageChage = (lanuage: any) => {
-		locale.value = lanuage;
-		localeLanguage.value = lanuage.name;
-	};
+	const { state } = useStore();
 
 	const route = useRoute();
 </script>
