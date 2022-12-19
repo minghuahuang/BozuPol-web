@@ -86,3 +86,40 @@ const i18n = createI18n({
 
 export default i18n
 ```
+
+6. ts配置vuex4
+
+```javascript
+// store/index.ts
+import { InjectionKey } from 'vue'  
+import { createStore, Store, useStore as baseUseStore } from 'vuex'
+
+type stateType = {
+  locale: any,
+  userStatus: number, 
+}
+
+export const key: InjectionKey<Store<stateType>> = Symbol('storekey')
+
+export const store = createStore({
+  ...
+})
+
+export function useStore() {
+  return baseUseStore(key)
+}
+
+// main.ts
+import { store, key } from './store'
+
+const app = createApp(App)
+app.use(store, key)
+
+
+// 使用
+
+import { useStore } from "@/store";
+
+const { state, commit, dispatch } = useStore()
+
+```
