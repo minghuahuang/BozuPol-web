@@ -123,3 +123,61 @@ import { useStore } from "@/store";
 const { state, commit, dispatch } = useStore()
 
 ```
+
+7. SSR启动控制台报错如下：
+
+```shell
+ElementPlusError: [IdInjection] Looks like you are using server rendering, you must provide a id provider to ensure the hydration process to be succeed
+usage: app.provide(ID_INJECTION_KEY, {
+  prefix: number,
+  current: number,
+})
+```
+
+解决方法：在`src/entry-server.ts`中添加
+
+```javascript
+import { ID_INJECTION_KEY } from 'element-plus';
+
+// ...
+app.provide(ID_INJECTION_KEY, {
+  prefix: Math.floor(Math.random() * 10000),
+  current: 0,
+})
+// ...
+
+```
+
+8. SSR启动后页面显示报错如下：
+
+```shell
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css" for /Users/huangminghua/Documents/up/BozuPol-web/node_modules/element-plus/theme-chalk/el-config-provider.css
+    at Loader.defaultGetFormat [as _getFormat] (internal/modules/esm/get_format.js:71:15)
+    at Loader.getFormat (internal/modules/esm/loader.js:102:42)
+    at Loader.getModuleJob (internal/modules/esm/loader.js:231:31)
+    at async ModuleWrap.<anonymous> (internal/modules/esm/module_job.js:58:21)
+    at async Promise.all (index 1)
+    at async link (internal/modules/esm/module_job.js:63:9)
+```
+
+解决方法：在`vite.config.ts`中注释如下代码：
+
+```javascript
+
+// import AutoImport from 'unplugin-auto-import/vite'
+// import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    // AutoImport({
+    //   resolvers: [ ElementPlusResolver() ]
+    // }),
+    // Components({
+    //   resolvers: [ ElementPlusResolver() ]
+    // })
+  ],
+})
+
+```

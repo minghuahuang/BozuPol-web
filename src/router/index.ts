@@ -1,6 +1,6 @@
 import home from '@/views/home/index.vue'
 import login from '@/views/login/index.vue'
-import { createRouter, createWebHistory, createWebHashHistory, createMemoryHistory } from 'vue-router'
+import { createRouter as _createRouter, createWebHistory, createWebHashHistory, createMemoryHistory } from 'vue-router'
 
 /**
  * createWebHistory: history模式称为HTML5模式，利于SEO，路由格式：http://example.com/home
@@ -12,6 +12,10 @@ import { createRouter, createWebHistory, createWebHashHistory, createMemoryHisto
  */
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/home'
+  },
   {
     path: '/home',
     name: 'Home',
@@ -32,9 +36,16 @@ const routes = [
   },
 ]
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
+export function createRouter() {
+  return _createRouter({
+    history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
+    routes
+  })
+}
 
-export default router
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes
+// })
+
+// export default router
