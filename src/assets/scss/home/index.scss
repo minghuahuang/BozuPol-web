@@ -1,0 +1,48 @@
+.home-page {
+  .banner {
+    height: 500px;
+    width: 100%;
+    background: url(../../images/home/banner.jpeg) no-repeat center center;
+    background-size: cover;
+  }
+  .main-wrapper {
+    @include main-wrapper;
+    .title {
+      font-size: 22px;
+    }
+    .sub-title {
+      font-size: 16px;
+      margin: 5px 0 25px 0;
+    }
+    .home-list {
+      @include flex-layout(row, space-between, center);
+      flex-wrap: wrap;
+      margin-left: -8px;
+      margin-right: -8px;
+      .item {
+        width: 30%;
+        overflow: hidden;
+        display: inline-block;
+        margin: 0 8px 25px 8px;
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+        .title {
+          width: 100%;
+          font-size: 18px;
+          margin: 15px 0;
+          font-weight: 500;
+          text-align: left;
+          @include text-overflow(1)
+        }
+        .price {
+          font-size: 16px;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

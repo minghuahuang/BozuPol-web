@@ -17,3 +17,11 @@ $orange: orange;
   justify-content: $justify;
   align-items: $align;
 }
+
+// 多行文本溢出显示省略
+@mixin text-overflow($line: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+}
