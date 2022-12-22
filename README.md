@@ -181,3 +181,49 @@ export default defineConfig({
 })
 
 ```
+
+9. 服务端数据预取(Server Data Fetching)问题，vue2中使用asyncData, Vue3中未找到相关方案，也无asyncData，待解决。
+
+```javascript
+  const matchComponents = router.currentRoute.value.matched.flatMap(record => {
+    console.log('router',record)
+    Object.values(record.components)
+  })
+
+  // // 对所有匹配的路由组件调用 asyncData()
+  // await Promise.all(matchComponents.map((Component: any) => {
+  //   if(Component.asyncData) {
+  //     return Component.asyncData({
+  //       store,
+  //       route: router.currentRoute
+  //     })
+  //   }
+  // }))
+```
+
+console 显示, 没有asyncData。 [官方指定Demo](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) 也没有做相应处理。
+
+```shell
+router {
+  path: '/home',
+  redirect: undefined,
+  name: 'Home',
+  meta: { title: '', keepAlive: false },
+  aliasOf: undefined,
+  beforeEnter: undefined,
+  props: { default: false },
+  children: [],
+  instances: {},
+  leaveGuards: Set(0) {},
+  updateGuards: Set(0) {},
+  enterCallbacks: {},
+  components: {
+    default: {
+      __name: 'index',
+      setup: [Function (anonymous)],
+      ssrRender: [Function: _sfc_ssrRender],
+      __scopeId: 'data-v-0ef3d734',
+      __file: '/Users/huangminghua/Documents/up/BozuPol-web/src/views/home/index.vue'
+    }
+  }
+```

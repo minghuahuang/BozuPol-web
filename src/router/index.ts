@@ -12,10 +12,10 @@ import { createRouter as _createRouter, createWebHistory, createMemoryHistory } 
  */
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/home'
-  },
+  // {
+  //   path: '/',
+  //   redirect: '/home'
+  // },
   {
     path: '/home',
     name: 'Home',
