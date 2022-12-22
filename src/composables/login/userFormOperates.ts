@@ -28,8 +28,9 @@ export default function userFormOperates(router: any, params: any) {
       if (res.code === 200) {
        commit("setUserStatus", res.data.status);
         router.push({
-          path: "/",
+          path: "/home",
         });
+        // window.location.href = '/home'
       } else {
         proxy.$message.error(res.message);
       }

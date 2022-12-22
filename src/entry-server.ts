@@ -13,21 +13,19 @@ export async function render(url: string) {
   await router.push(url)
   await router.isReady()
 
-  const matchComponents = router.currentRoute.value.matched.flatMap(record => {
-    console.log('router',record)
-    Object.values(record.components)
-  })
+  const matchComponents = router.currentRoute.value.matched.flatMap(record => Object.values(record.components))
 
   // // 对所有匹配的路由组件调用 asyncData()
-  // await Promise.all(matchComponents.map((Component: any) => {
-  //   if(Component.asyncData) {
-  //     return Component.asyncData({
-  //       store,
-  //       route: router.currentRoute
-  //     })
-  //   }
-  // }))
+  await Promise.all(matchComponents.map((Component: any) => {
+    if(Component.asyncData) {
+      return Component.asyncData({
+        store,
+        route: router.currentRoute
+      })
+    }
+  }))
 
-  const html = await renderToString(app)
-  return html
+  const appHtml = await renderToString(app)
+  const { state } = store
+  return { appHtml, state }
 }

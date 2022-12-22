@@ -1,10 +1,12 @@
 import { InjectionKey } from 'vue'  
 import { createStore as _createStore, Store, useStore as baseUseStore } from 'vuex'
 import { savaLanguage } from '@/api/layout'
+import { fetchRoomList } from '@/api/home'
 
 type stateType = {
   locale: any,
   userStatus: number, 
+  roomList: Array<any>,
 }
 
 export const key: InjectionKey<Store<stateType>> = Symbol('storekey')
@@ -14,6 +16,7 @@ export function createStore() {
     state: {
       locale: null,
       userStatus: 0,
+      roomList: [],
     },
     mutations: {
       setLanguage(state, params) {
@@ -21,6 +24,9 @@ export function createStore() {
       },
       setUserStatus(state, params) {
         state.userStatus = params
+      },
+      setRoomList(state, params) {
+        state.roomList = params
       }
     },
     actions: {
@@ -30,6 +36,18 @@ export function createStore() {
             commit('setLanguage', language)
           }
         });
+      },
+      getRoomList({ commit }, params) {
+        return new Promise((resolve, reject) => {
+          fetchRoomList().then(res => {
+            const { code, data } = res
+            if(code == 'success') {
+              console.log('保存数据', data)
+              commit('setRoomList', data)
+              resolve(true)
+            }
+          })
+        })
       }
     }
   })

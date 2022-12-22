@@ -4,4 +4,14 @@ type ResponseType = {
   data: any
 }
 
-export type { ResponseType }
+type RoomListResType = {
+  code: string,
+  success: boolean,
+  message: string,
+  data: Array<any>
+}
+
+export type { 
+  ResponseType,
+  RoomListResType
+}

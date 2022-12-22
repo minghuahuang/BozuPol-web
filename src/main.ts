@@ -9,12 +9,16 @@ import { createI18n } from './language/i18n'
 import ElementPlus, { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import { sync } from 'vuex-router-sync'
+
 
 export function createApp() {
   const app = createSSRApp(App)
   const router = createRouter()
   const store = createStore()
   const i18n = createI18n()
+
+  sync(store, router)
 
   app.use(router)
   app.use(store, key)

@@ -1,5 +1,6 @@
-import home from '@/views/home/index.vue'
-import login from '@/views/login/index.vue'
+import { login } from '@/views/login/index.vue';
+// import home from '@/views/home/index.vue'
+// import login from '@/views/login/index.vue'
 import { createRouter as _createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
 /**
@@ -10,6 +11,9 @@ import { createRouter as _createRouter, createWebHistory, createMemoryHistory } 
  * createWebHistory，createWebHashHistory通过window.history.state来管理历史记录；
  * createMemoryHistory通过内部维护一个队列和一个位置指针进行路由记录管理，保证SSR中路由能正常进行；
  */
+
+const home = () => import('@/views/home/index.vue')
+const login = () => import('@/view/login/index.vue')
 
 const routes = [
   // {
