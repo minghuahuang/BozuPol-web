@@ -1,6 +1,3 @@
-import { login } from '@/views/login/index.vue';
-// import home from '@/views/home/index.vue'
-// import login from '@/views/login/index.vue'
 import { createRouter as _createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
 /**
@@ -13,13 +10,9 @@ import { createRouter as _createRouter, createWebHistory, createMemoryHistory } 
  */
 
 const home = () => import('@/views/home/index.vue')
-const login = () => import('@/view/login/index.vue')
+const login = () => import('@/views/login/index.vue')
 
 const routes = [
-  // {
-  //   path: '/',
-  //   redirect: '/home'
-  // },
   {
     path: '/home',
     name: 'Home',
