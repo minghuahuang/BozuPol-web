@@ -64,12 +64,22 @@ async function createServer() {
 			// 4. 渲染应用的 HTML。这假设 entry-server.js 导出的 `render`
 			//    函数调用了适当的 SSR 框架 API。
 			//    例如 ReactDOMServer.renderToString()
-			const { appHtml, state } = await render(url);
+			const manifest = JSON.parse(
+				fs.readFileSync(
+					path.resolve("dist/client/ssr-manifest.json"),
+					"utf-8"
+				)
+			);
+			const { appHtml, state, preloadOLinks } = await render(
+				url,
+				manifest
+			);
 
 			// 5. 注入渲染后的应用程序 HTML 到模板中。
 			const html = template
 				.replace(`<!--ssr-outlet-->`, appHtml)
-				.replace("<!--vuex-state-->", JSON.stringify(state));
+				.replace(`<!--prelood-links-->`, preloadOLinks)
+				.replace(`<!--vuex-state-->`, JSON.stringify(state));
 
 			// 6. 返回渲染后的 HTML。
 			res.status(200).set({ "Content-Type": "text/html" }).end(html);
