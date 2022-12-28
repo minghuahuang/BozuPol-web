@@ -66,11 +66,11 @@ async function createServer() {
 			//    例如 ReactDOMServer.renderToString()
 			const manifest = JSON.parse(
 				fs.readFileSync(
-					path.resolve("dist/client/ssr-manifest.json"),
+					path.resolve(__dirname, "dist/client/ssr-manifest.json"),
 					"utf-8"
 				)
 			);
-			const { appHtml, state, preloadOLinks } = await render(
+			const { appHtml, state, preloadLinks } = await render(
 				url,
 				manifest
 			);
@@ -78,8 +78,8 @@ async function createServer() {
 			// 5. 注入渲染后的应用程序 HTML 到模板中。
 			const html = template
 				.replace(`<!--ssr-outlet-->`, appHtml)
-				.replace(`<!--prelood-links-->`, preloadOLinks)
-				.replace(`<!--vuex-state-->`, JSON.stringify(state));
+				.replace(`<!--preload-links-->`, preloadLinks)
+				.replace(`'<!--vuex-state-->'`, JSON.stringify(state));
 
 			// 6. 返回渲染后的 HTML。
 			res.status(200).set({ "Content-Type": "text/html" }).end(html);

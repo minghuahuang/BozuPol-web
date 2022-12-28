@@ -38,11 +38,10 @@ export function createStore() {
         });
       },
       getRoomList({ commit }, params) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           fetchRoomList().then(res => {
             const { code, data } = res
             if(code == 'success') {
-              console.log('保存数据', data)
               commit('setRoomList', data)
               resolve(true)
             }

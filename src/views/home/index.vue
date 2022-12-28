@@ -21,14 +21,11 @@
 	export default defineComponent({
 		setup(props) {
 			const store = useStore();
+
 			return { store };
 		},
 		asyncData({ store, route }: any) {
-			return store.dispatch("getRoomList", {
-				pageNo: 1,
-				pageSize: 3,
-				cityCode: "hz",
-			});
+			return store.dispatch("getRoomList");
 		},
 	});
 </script>

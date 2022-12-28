@@ -58,8 +58,8 @@ function renderLinks(modules: any, manifest: any) {
         // }
       })
     }
-    return links
   });
+  return links
 }
 
 function renderPreloadLink(file: any) {

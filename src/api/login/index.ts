@@ -111,9 +111,7 @@ export async function userLogout() {
         loading.close()
       }, 200)
       res && res.filter((item: any) => {
-        console.log('每一项', item)
         const token = localStorage.getItem("token")
-        console.log('token', token)
         if (item.token && item.token.indexOf(token) !== -1) { // 存在相同token
           resolve({ userId: item.userId })
         }

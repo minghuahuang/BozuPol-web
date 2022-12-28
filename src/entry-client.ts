@@ -12,7 +12,6 @@ router.beforeEach((to, from, next) => {
     ...database.languageObjectStore,
     ...database.userObjectStore
   }).then((res: any) => {
-    console.log('初始化所有对象仓库', res)
     next()
   })
 })

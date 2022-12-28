@@ -10,7 +10,6 @@
 
 	const router = useRouter();
 	const routes = useRoute();
-	console.log(routes.query);
 </script>
 
 <style lang="scss" scoped></style>

@@ -69,7 +69,6 @@
 
 	const handleLanguageGet = () => {
 		fetchLanguage().then((res) => {
-			console.log(res);
 			if (res.code === 200) {
 				if (res.data && res.data.name.name === "zh") {
 					emit("changeLanguage", zhCn);
