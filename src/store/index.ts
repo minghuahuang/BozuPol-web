@@ -2,6 +2,7 @@ import { InjectionKey } from 'vue'
 import { createStore as _createStore, Store, useStore as baseUseStore } from 'vuex'
 import { savaLanguage } from '@/api/layout'
 import { fetchRoomList } from '@/api/home'
+import type { RoomListParamsType } from '@/api/type'
 
 type stateType = {
   locale: any,
@@ -62,7 +63,7 @@ export function createStore() {
           }
         });
       },
-      getRoomList({ commit }, params) {
+      getRoomList({ commit }, params: RoomListParamsType) {
         const { pageNum } = params
         commit('setPageNum', pageNum)
         const argus = {

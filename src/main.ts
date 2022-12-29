@@ -11,7 +11,6 @@ import 'element-plus/dist/index.css'
 
 import { sync } from 'vuex-router-sync'
 
-
 export function createApp() {
   const app = createSSRApp(App)
   const router = createRouter()
@@ -28,4 +27,15 @@ export function createApp() {
   app.config.globalProperties.$message = ElMessage
 
   return { app, router, store }
+}
+
+export function asyncDataFilter(actived: any, store: any, route: any) {
+  return Promise.all(actived.map((Component: any) => {
+    if(Component.asyncData) {
+      return Component.asyncData({
+        store,
+        route,
+      })
+    }
+  }))
 }

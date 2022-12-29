@@ -1,7 +1,6 @@
-import { createApp } from "./main";
+import { createApp, asyncDataFilter } from "./main";
 import { ID_INJECTION_KEY } from 'element-plus';
 import { renderToString } from 'vue/server-renderer'
-// import { basename } from "node:path";
 
 export async function render(url: string, manifest: any) {
   const { app, router, store } = createApp()
@@ -17,14 +16,7 @@ export async function render(url: string, manifest: any) {
   const matchComponents = router.currentRoute.value.matched.flatMap(record => Object.values(record.components))
 
   // // 对所有匹配的路由组件调用 asyncData()
-  await Promise.all(matchComponents.map((Component: any) => {
-    if(Component.asyncData) {
-      return Component.asyncData({
-        store,
-        route: router.currentRoute
-      })
-    }
-  }))
+  await asyncDataFilter(matchComponents, store, router.currentRoute)
 
   const context: any = {}
   const appHtml = await renderToString(app, context)
@@ -40,22 +32,11 @@ export async function render(url: string, manifest: any) {
 
 function renderLinks(modules: any, manifest: any) {
   let links = ''
-  // const seen = new Set()
   modules.forEach((id: any) => {
     const files = manifest[id]
     if (files) {
       files.forEach((file: any) => {
-        // if (!seen.has(file)) {
-        //   seen.add(file)
-        //   // const filename = basename(file)
-        //   if (manifest[filename]) {
-        //     for (const depFile of manifest[filename]) {
-        //       links += renderPreloadLink(depFile)
-        //       seen.add(depFile)
-        //     }
-        //   }
-          links += renderPreloadLink(file)
-        // }
+        links += renderPreloadLink(file)
       })
     }
   });
@@ -78,7 +59,6 @@ function renderPreloadLink(file: any) {
   } else if (file.endsWith('.png')) {
     return ` <link rel="preload" href="${file}" as="image" type="image/png">`
   } else {
-    // TODO
     return ''
   }
 }

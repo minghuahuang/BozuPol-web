@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios'
+
 type ResponseType = {
   code: number,
   message: string,
@@ -11,11 +13,11 @@ type RoomListResType = {
   data: Array<any>
 }
 
-type RoomListParamsType = {
+type RoomListParamsType = AxiosRequestConfig & {
   pageNum: number,
-  // pageSize: number,
-  // city: string,
-  // cityCode: string
+  pageSize: number,
+  city: string,
+  cityCode: string
 }
 
 export type { 

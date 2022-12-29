@@ -12,18 +12,19 @@
     }
     .sub-title {
       font-size: 16px;
-      margin: 5px 0 25px 0;
+      margin: 5px 0 10px 0;
     }
     .home-list {
-      @include flex-layout(row, space-between, center);
+      @include flex-layout(row, flex-start, center);
       flex-wrap: wrap;
-      margin-left: -8px;
-      margin-right: -8px;
+      margin-left: -18px;
+      margin-right: -18px;
       .item {
         width: 30%;
         overflow: hidden;
         display: inline-block;
-        margin: 0 8px 25px 8px;
+        margin: 0 18px 25px 18px;
+        cursor: pointer;
         img {
           width: 100%;
           height: 210px;
