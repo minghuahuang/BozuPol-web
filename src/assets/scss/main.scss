@@ -12,3 +12,8 @@ a {
 .container {
   min-height: calc(100vh - 380px);
 }
+
+:deep(.el-pagination) {
+  margin-bottom: 20px;
+  justify-content: center;
+}

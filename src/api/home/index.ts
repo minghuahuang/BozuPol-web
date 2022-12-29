@@ -1,7 +1,7 @@
 import { http } from "@/utils/http";
-import type { RoomListResType } from '../type'
+import type { RoomListResType, RoomListParamsType } from '../type'
 
 
-export function fetchRoomList(): Promise<RoomListResType> {
-  return http.httpGet('https://testyl-web.wkbins.com/yl-web/ylParkController/hotParkList', {})
+export function fetchRoomList(params:any): Promise<RoomListResType> {
+  return http.httpGet('https://testyl-web.wkbins.com/yl-web/ylParkController/parkList?city=北京&cityCode=110100', params)
 }

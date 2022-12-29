@@ -11,7 +11,15 @@ type RoomListResType = {
   data: Array<any>
 }
 
+type RoomListParamsType = {
+  pageNum: number,
+  // pageSize: number,
+  // city: string,
+  // cityCode: string
+}
+
 export type { 
   ResponseType,
-  RoomListResType
+  RoomListResType,
+  RoomListParamsType
 }

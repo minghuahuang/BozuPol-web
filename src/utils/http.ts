@@ -30,7 +30,7 @@ class Http {
   }
 
   public httpGet<T>(url:string, params: AxiosRequestConfig):Promise<T> {
-    return Http.axioxInstance.get(url, params).then(res => res.data).catch()
+    return Http.axioxInstance.get(url, { params }).then(res => res.data).catch()
   }
 
   public httpPost<T>(url:string, data: AxiosRequestConfig):Promise<T> {

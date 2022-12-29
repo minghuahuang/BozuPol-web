@@ -5,7 +5,7 @@
     background: url(../../images/home/banner.jpeg) no-repeat center center;
     background-size: cover;
   }
-  .main-wrapper {
+  .main-container {
     @include main-wrapper;
     .title {
       font-size: 22px;

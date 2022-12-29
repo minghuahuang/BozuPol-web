@@ -70,10 +70,11 @@ async function createServer() {
 					"utf-8"
 				)
 			);
-			const { appHtml, state, preloadLinks } = await render(
-				url,
-				manifest
-			);
+			const {
+				appHtml,
+				state,
+				preloadLinks = "",
+			} = await render(url, manifest);
 
 			// 5. 注入渲染后的应用程序 HTML 到模板中。
 			const html = template
