@@ -3,5 +3,5 @@ import type { RoomListResType, RoomListParamsType } from '../type'
 
 
 export function fetchRoomList(params:RoomListParamsType): Promise<RoomListResType> {
-  return http.httpGet('https://testyl-web.wkbins.com/yl-web/ylParkController/parkList', params)
+  return http.httpGet('/yl-web/ylParkController/parkList', params)
 }

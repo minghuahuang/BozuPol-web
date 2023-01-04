@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const defaultConfig = {
   timeout: 5000,
-  baseUrl: '',
+  baseURL: import.meta.env.PROD ? 'https://yl-web.wkbins.com' : 'https://testyl-web.wkbins.com',
 }
 
 class Http {

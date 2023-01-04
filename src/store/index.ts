@@ -2,7 +2,8 @@ import { InjectionKey } from 'vue'
 import { createStore as _createStore, Store, useStore as baseUseStore } from 'vuex'
 import { savaLanguage } from '@/api/layout'
 import { fetchRoomList } from '@/api/home'
-import type { RoomListParamsType } from '@/api/type'
+import { fetchRoomDetail } from '@/api/detail'
+import type { RoomListParamsType, RoomDetailParamsType } from '@/api/type'
 
 type stateType = {
   locale: any,
@@ -12,7 +13,9 @@ type stateType = {
   pageSize: number,
   total: number,
   city: string,
-  cityCode: string
+  cityCode: string,
+  code: string,
+  detail: any,
 }
 
 export const key: InjectionKey<Store<stateType>> = Symbol('storekey')
@@ -28,6 +31,8 @@ export function createStore() {
       total: 0,
       city: '北京',
       cityCode: '110100',
+      code: '',
+      detail: {},
     },
     mutations: {
       setLanguage(state, params) {
@@ -54,6 +59,12 @@ export function createStore() {
       setCityCode(state, params) {
         state.cityCode = params
       },
+      setCode(state, params) {
+        state.code = params
+      },
+      setDetail(state, params) {
+        state.detail = params
+      },
     },
     actions: {
       fetchLanguageSave({ commit }, language: any) {
@@ -63,6 +74,7 @@ export function createStore() {
           }
         });
       },
+      // 列表接口
       getRoomList({ commit }, params: RoomListParamsType) {
         const { pageNum } = params
         commit('setPageNum', pageNum)
@@ -76,6 +88,19 @@ export function createStore() {
             if(code == 'success') {
               commit('setRoomList', data)
               commit('setTotal', 18) // 接口未返回总条数，设置18条，分3页
+              resolve(true)
+            }
+          })
+        })
+      },
+      // 详情接口
+      getRoomDetail({ commit }, params: RoomDetailParamsType) {
+        const { code } = params
+        return new Promise((resolve) => {
+          fetchRoomDetail({ code }).then(res => {
+            const { code, data } = res
+            if(code == 'success') {
+              commit('setDetail', (data as any).parkInfo)
               resolve(true)
             }
           })

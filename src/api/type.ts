@@ -8,7 +8,7 @@ type ResponseType = {
 
 type RoomListResType = {
   code: string,
-  success: boolean,
+  success?: boolean,
   message: string,
   data: Array<any>
 }
@@ -20,8 +20,13 @@ type RoomListParamsType = AxiosRequestConfig & {
   cityCode: string
 }
 
+type RoomDetailParamsType = AxiosRequestConfig & {
+  code: string
+}
+
 export type { 
   ResponseType,
   RoomListResType,
-  RoomListParamsType
+  RoomListParamsType,
+  RoomDetailParamsType
 }

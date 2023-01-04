@@ -11,6 +11,7 @@ import { createRouter as _createRouter, createWebHistory, createMemoryHistory } 
 
 const home = () => import('@/views/home/index.vue')
 const login = () => import('@/views/login/index.vue')
+const detail = () => import('@/views/detail/index.vue')
 
 const routes = [
   {
@@ -26,6 +27,15 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: login,
+    meta: {
+      title: '',
+      keepAlive: false,
+    }
+  },
+  {
+    path: '/detail',
+    name: 'Detail',
+    component: detail,
     meta: {
       title: '',
       keepAlive: false,

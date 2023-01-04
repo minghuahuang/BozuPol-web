@@ -1,6 +1,11 @@
 <template>
 	<div class="header">
-		<img class="logo" src="../../assets/images/layout/logo.png" alt="bozupol" />
+		<img
+			@click="router.push({ name: 'Home' })"
+			class="logo"
+			src="../../assets/images/layout/logo.png"
+			alt="bozupol"
+		/>
 		<el-menu
 			:default-active="activeIndex"
 			class="el-menu-demo"

@@ -6,9 +6,9 @@ $orange: orange;
   text-overflow: ellipsis;
 }
 
-@mixin main-wrapper {
+@mixin main-wrapper($tb: 40px) {
   width: 1080px;
-  margin: 0 auto;
+  margin: $tb auto;
 }
 
 @mixin flex-layout($dir: column, $justify: center, $align: center) {
