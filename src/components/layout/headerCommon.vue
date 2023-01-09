@@ -13,7 +13,15 @@
 			:ellipsis="false"
 			@select="handleSelect"
 		>
-			<el-menu-item index="orders">{{ t("header.orders") }}</el-menu-item>
+			<el-menu-item index="orders">
+				{{ t("header.orders") }}
+				<template v-if="state.showOrder">
+					<Suspense>
+						<OrderPopover />
+						<template #fallback> loading... </template>
+					</Suspense>
+				</template>
+			</el-menu-item>
 			<el-menu-item index="records">{{ t("header.records") }}</el-menu-item>
 			<el-sub-menu index="language">
 				<template #title>{{ t("header.language") }}</template>
@@ -36,15 +44,18 @@
 <script setup lang="ts">
 	import zhCn from "element-plus/lib/locale/lang/zh-cn";
 	import en from "element-plus/lib/locale/lang/en";
-	import { ref, getCurrentInstance } from "vue";
-	import { savaLanguage, fetchLanguage } from "../../api/layout";
+	import { ref, getCurrentInstance, defineAsyncComponent } from "vue";
 	import { useI18n } from "vue-i18n";
 	import { useRouter } from "vue-router";
 	import { userLogout } from "@/api/login";
 	import type { ResponseType } from "@/api/type";
 	import { useStore } from "@/store";
 
-	const { state, dispatch } = useStore();
+	const OrderPopover = defineAsyncComponent(
+		() => import("@/views/order/components/orderPopover.vue")
+	);
+
+	const { state, dispatch, commit } = useStore();
 
 	const { proxy } = getCurrentInstance();
 
@@ -67,23 +78,10 @@
 			});
 		} else if (key === "logout") {
 			fetchLogout();
+		} else if (key === "orders") {
+			commit("setShowOrder", true);
 		}
 	};
-
-	const emit = defineEmits<{ (e: "changeLanguage", language: any): void }>();
-
-	const handleLanguageGet = () => {
-		fetchLanguage().then((res) => {
-			if (res.code === 200) {
-				if (res.data && res.data.name.name === "zh") {
-					emit("changeLanguage", zhCn);
-				} else if (res.data && res.data.name.name === "en") {
-					emit("changeLanguage", en);
-				}
-			}
-		});
-	};
-	// handleLanguageGet();
 
 	// 登出接口
 	const fetchLogout = () => {

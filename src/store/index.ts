@@ -16,6 +16,7 @@ type stateType = {
   cityCode: string,
   code: string,
   detail: any,
+  showOrder: boolean,
 }
 
 export const key: InjectionKey<Store<stateType>> = Symbol('storekey')
@@ -33,6 +34,7 @@ export function createStore() {
       cityCode: '110100',
       code: '',
       detail: {},
+      showOrder: false
     },
     mutations: {
       setLanguage(state, params) {
@@ -65,6 +67,9 @@ export function createStore() {
       setDetail(state, params) {
         state.detail = params
       },
+      setShowOrder(state, params) {
+        state.showOrder = params
+      }
     },
     actions: {
       fetchLanguageSave({ commit }, language: any) {
