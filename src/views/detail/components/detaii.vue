@@ -63,10 +63,11 @@
 	import { useStore } from "@/store";
 	import { reactive, computed, getCurrentInstance } from "vue";
 	import { saveOrder } from "@/api/order";
-	import { useRoute } from "vue-router";
+	import { useRoute, useRouter } from "vue-router";
 
 	const store = useStore();
 	const route = useRoute();
+	const router = useRouter();
 
 	const detailInfo = computed(() => store.state.detail);
 
@@ -80,7 +81,21 @@
 
 	const handleOrder = () => {
 		// 数据校验
+		// 验证登录态
+		if (store.state.userStatus) {
+			fetchOrder();
+		} else {
+			const { pathname, search } = window.location;
+			router.replace({
+				path: "/login",
+				query: {
+					redirect: pathname + search,
+				},
+			});
+		}
+	};
 
+	const fetchOrder = () => {
 		const { code } = route.query;
 		const { name, minPrice } = detailInfo.value;
 		const params = {

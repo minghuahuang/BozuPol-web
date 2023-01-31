@@ -2,6 +2,7 @@ import { getCurrentInstance } from "vue";
 import { userSign, userLogin } from "@/api/login";
 import type { ResponseType } from "@/api/type";
 import { useStore } from '@/store'
+import { useRoute } from "vue-router";
 
 type InfoType = {
   phone: string;
@@ -11,6 +12,7 @@ type InfoType = {
 export default function userFormOperates(router: any, params: any) {
   const { proxy } = getCurrentInstance();
   const { commit } = useStore();
+  const route = useRoute();
   // 注册接口
   const fetchSign = (params: InfoType) => {
     userSign(params).then((res: ResponseType) => {
@@ -27,8 +29,9 @@ export default function userFormOperates(router: any, params: any) {
     userLogin(params).then((res: ResponseType) => {
       if (res.code === 200) {
        commit("setUserStatus", res.data.status);
+       const { redirect }: any = route.query
         router.push({
-          path: "/home",
+          path: redirect || '/home',
         });
         // window.location.href = '/home'
       } else {

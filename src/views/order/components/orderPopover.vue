@@ -35,8 +35,20 @@
 		});
 	};
 
-	await getOrderList();
+	// 验证登录态
+	if (store.state.userStatus) {
+		await getOrderList();
+	} else {
+		const { pathname, search } = window.location;
+		router.replace({
+			path: "/login",
+			query: {
+				redirect: pathname + search,
+			},
+		});
+	}
 
+	// 订单中心跳转
 	const handleLink = (code: string) => {
 		router.push({
 			path: "/detail",

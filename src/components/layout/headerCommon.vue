@@ -36,7 +36,7 @@
 				</template>
 				<el-menu-item index="logout">{{ t("login.logout") }}</el-menu-item>
 			</el-sub-menu>
-			<el-menu-item index="login">
+			<el-menu-item index="login" v-if="state.userStatus !== 1">
 				{{ t("login.loginTab") }}/{{ t("login.signTab") }}
 			</el-menu-item>
 		</el-menu>
