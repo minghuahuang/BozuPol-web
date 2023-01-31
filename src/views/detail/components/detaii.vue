@@ -45,7 +45,7 @@
 						<el-input placeholder="请输入参观人数" v-model="info.count"></el-input>
 					</el-form-item>
 					<el-form-item label="联 系 人：">
-						<el-input placeholder="请输入联系人姓名" v-model="info.name"></el-input>
+						<el-input placeholder="请输入联系人姓名" v-model="info.userName"></el-input>
 					</el-form-item>
 					<el-form-item label="联系电话：">
 						<el-input placeholder="请输入联系电话" v-model="info.phone"></el-input>
@@ -61,20 +61,55 @@
 
 <script setup lang="ts">
 	import { useStore } from "@/store";
-	import { reactive, computed } from "vue";
+	import { reactive, computed, getCurrentInstance } from "vue";
+	import { saveOrder } from "@/api/order";
+	import { useRoute } from "vue-router";
 
 	const store = useStore();
+	const route = useRoute();
 
 	const detailInfo = computed(() => store.state.detail);
 
+	const { proxy } = getCurrentInstance();
+
 	const info = reactive({
-		count: 0,
-		name: "",
+		count: 1,
+		userName: "",
 		phone: "",
 	});
 
 	const handleOrder = () => {
-		console.log("提交", info);
+		// 数据校验
+
+		const { code } = route.query;
+		const { name, minPrice } = detailInfo.value;
+		const params = {
+			code,
+			name,
+			minPrice,
+			imgUrl: "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+			...info,
+		};
+		saveOrder(params).then((res) => {
+			const { data } = res;
+			if (data) {
+				proxy.$notify({
+					title: "预定成功",
+					message: "恭喜您，预定成功，稍后在订单中心查看。",
+					type: "success",
+					duration: 300,
+				});
+			} else {
+				proxy.$notify({
+					title: "预定失败",
+					message: "订单中心已存在。",
+					type: "error",
+					duration: 300,
+				});
+			}
+			info.userName = "";
+			info.phone = "";
+		});
 	};
 </script>
 

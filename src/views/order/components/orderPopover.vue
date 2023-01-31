@@ -1,30 +1,52 @@
 <template>
+	<Teleport to="#app">
+		<div class="mask" @click="handleClosePopover"></div>
+	</Teleport>
 	<ul>
-		<li v-for="item in count">
-			<img
-				src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-			/>
+		<li v-for="item in orders" @click="handleLink(item.code)">
+			<img :src="item.imgUrl" />
 			<div class="content">
-				<p class="title">北京适合元</p>
-				<p class="price">价格</p>
+				<p class="title">{{ item.name }}</p>
+				<p class="price">{{ item.minPrice }}元起</p>
 			</div>
 		</li>
 	</ul>
 </template>
 
 <script setup lang="ts">
-	import { ref } from "vue";
+	import { ref, getCurrentInstance } from "vue";
+	import { orderList } from "@/api/order";
+	import { useRouter } from "vue-router";
+	import { useStore } from "@/store";
 
-	const count = ref(2);
-	function fetchApi() {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				count.value = 6;
-				resolve(true);
-			}, 3000);
+	const orders = ref([]);
+	const router = useRouter();
+	const store = useStore();
+	const { proxy } = getCurrentInstance();
+
+	const getOrderList = () => {
+		return orderList().then((res) => {
+			const { code, data, message } = res;
+			if (code === 200) {
+				orders.value = data;
+			} else {
+				proxy.$message.error(message);
+			}
 		});
-	}
-	await fetchApi();
+	};
+
+	await getOrderList();
+
+	const handleLink = (code: string) => {
+		router.push({
+			path: "/detail",
+			query: { code },
+		});
+	};
+
+	const handleClosePopover = () => {
+		store.commit("setShowOrder", false);
+	};
 </script>
 
 <style lang="scss" scoped>

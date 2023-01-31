@@ -10,7 +10,8 @@ if((window as any).__INITIAL_STATE__) {
 router.beforeEach((to, from, next) => {
   database.db.openStore({
     ...database.languageObjectStore,
-    ...database.userObjectStore
+    ...database.userObjectStore,
+    ...database.orderObjectStore,
   }).then((res: any) => {
     next()
   })

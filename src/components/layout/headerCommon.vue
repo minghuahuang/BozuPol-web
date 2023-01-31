@@ -18,7 +18,9 @@
 				<template v-if="state.showOrder">
 					<Suspense>
 						<OrderPopover />
-						<template #fallback> loading... </template>
+						<template #fallback>
+							<div class="loading-block">拼命加载中...</div>
+						</template>
 					</Suspense>
 				</template>
 			</el-menu-item>

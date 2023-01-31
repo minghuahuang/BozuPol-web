@@ -13,6 +13,20 @@ a {
   min-height: calc(100vh - 380px);
 }
 
+.loading-block{
+  @include placeholder-order(center);
+}
+
+.mask{
+  position:fixed;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10;
+  left:0;
+  top:0;
+  height: 100%;
+}
+
 :deep(.el-pagination) {
   margin-bottom: 20px;
   justify-content: center;
