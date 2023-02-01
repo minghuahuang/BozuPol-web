@@ -109,16 +109,16 @@
 			const { data } = res;
 			if (data) {
 				proxy.$notify({
-					title: "预定成功",
-					message: "恭喜您，预定成功，稍后在订单中心查看。",
-					type: "success",
+					title: "预定失败",
+					message: "订单中心已存在。",
+					type: "error",
 					duration: 300,
 				});
 			} else {
 				proxy.$notify({
-					title: "预定失败",
-					message: "订单中心已存在。",
-					type: "error",
+					title: "预定成功",
+					message: "恭喜您，预定成功，稍后在订单中心查看。",
+					type: "success",
 					duration: 300,
 				});
 			}

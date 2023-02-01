@@ -29,11 +29,11 @@ export default function userFormOperates(router: any, params: any) {
     userLogin(params).then((res: ResponseType) => {
       if (res.code === 200) {
        commit("setUserStatus", res.data.status);
+       localStorage.setItem('userId', res.data.userId)
        const { redirect }: any = route.query
         router.push({
           path: redirect || '/home',
         });
-        // window.location.href = '/home'
       } else {
         proxy.$message.error(res.message);
       }

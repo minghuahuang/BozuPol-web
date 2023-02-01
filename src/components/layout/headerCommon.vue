@@ -92,7 +92,9 @@
 				router.push({
 					path: "/login",
 				});
-				localStorage.setItem("userStatus", "0");
+				// localStorage.setItem("userStatus", "0");
+				commit("setUserStatus", "0");
+				localStorage.setItem("userId", "");
 			} else {
 				proxy.$message.error(res.message);
 			}
