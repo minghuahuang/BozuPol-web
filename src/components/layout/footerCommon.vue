@@ -3,7 +3,7 @@
 		<div class="footer-wrapper">
 			<ul>
 				<li v-for="option in menus">
-					<h4>{{ t(`footer['${option.title}']`) }}</h4>
+					<h3>{{ t(`footer['${option.title}']`) }}</h3>
 					<a target="_blank" :href="item.link" v-for="item in option.list">{{
 						t(`footer['${item.name}']`)
 					}}</a>
