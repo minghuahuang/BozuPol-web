@@ -77,10 +77,15 @@ async function createServer() {
 			} = await render(url, manifest);
 
 			// 5. 注入渲染后的应用程序 HTML 到模板中。
+			const { meta } = state.route
+			const { title, keywords, description } = meta
 			const html = template
 				.replace(`<!--ssr-outlet-->`, appHtml)
 				.replace(`<!--preload-links-->`, preloadLinks)
-				.replace(`'<!--vuex-state-->'`, JSON.stringify(state));
+				.replace(`'<!--vuex-state-->'`, JSON.stringify(state))
+				.replace(`<title>`, `<title>${title}`)
+				.replace(`<meta name="keywords" content="">`, `<meta name="keywords" content="${keywords}">`)
+				.replace(`<meta name="description" content="">`, `<meta name="description" content="${description}">`);
 
 			// 6. 返回渲染后的 HTML。
 			res.status(200).set({ "Content-Type": "text/html" }).end(html);

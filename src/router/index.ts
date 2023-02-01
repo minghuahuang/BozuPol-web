@@ -19,7 +19,9 @@ const routes = [
     name: 'Home',
     component: home,
     meta: {
-      title: '',
+      title: 'BozuPol-国内最大的养老机构平台',
+      keywords: 'BozuPol，高品质养老，旅居养老',
+      description: '连锁品牌，活力养老，失能照护，医保定点，康复护理，临终关怀',
       keepAlive: false,
     }
   },
@@ -28,7 +30,9 @@ const routes = [
     name: 'Login',
     component: login,
     meta: {
-      title: '',
+      title: 'BozuPol-国内最大的养老机构平台',
+      keywords: 'BozuPol，高品质养老，旅居养老',
+      description: '连锁品牌，活力养老，失能照护，医保定点，康复护理，临终关怀',
       keepAlive: false,
     }
   },
@@ -37,7 +41,9 @@ const routes = [
     name: 'Detail',
     component: detail,
     meta: {
-      title: '',
+      title: 'BozuPol-国内最大的养老机构平台',
+      keywords: 'BozuPol，高品质养老，旅居养老',
+      description: '连锁品牌，活力养老，失能照护，医保定点，康复护理，临终关怀',
       keepAlive: false,
     }
   },
